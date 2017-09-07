@@ -1,8 +1,12 @@
 package com.zheng.common.base;
 
+import com.zheng.common.dto.UpmsUserInfoRedis;
 import com.zheng.common.util.PropertiesFileUtil;
+import com.zheng.common.util.UserUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.session.InvalidSessionException;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +22,12 @@ import java.io.File;
 public abstract class BaseController {
 
 	private final static Logger _log = LoggerFactory.getLogger(BaseController.class);
+
+	public UpmsUserInfoRedis getUpmsUserInfoRedis(){
+		Subject subject = SecurityUtils.getSubject();
+		String username = (String) subject.getPrincipal();
+		return UserUtils.getUserInfoFromRedis(BaseConstants.UPMS_USER_INFO_PREFIX_REDIS + username);
+	}
 
 	/**
 	 * 统一异常处理

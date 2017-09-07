@@ -24,6 +24,7 @@
         <module>zheng-oss</module>
         <module>zheng-upms</module>
         <module>zheng-cms</module>
+        <module>zheng-sms</module>
         <module>zheng-pay</module>
         <module>zheng-ucenter</module>
         <module>zheng-wechat</module>
